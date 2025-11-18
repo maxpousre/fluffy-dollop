@@ -306,8 +306,27 @@ Each VMRS system has its own rules file: `rules_system_{code}.txt`
 
 ### Claude API Settings
 ```python
+# OPTIMIZED FOR COST EFFICIENCY
+# Using Claude 3.5 Haiku (~90% cheaper than Sonnet 4)
+# Haiku is excellent for deterministic, structured tasks
+
+DEFAULT_MODEL = "claude-3-5-haiku-20241022"
+
+# Per-agent model configuration (allows flexibility)
+AGENT_MODELS = {
+    "agent_1": "claude-3-5-haiku-20241022",  # System Classifier
+    "agent_2": "claude-3-5-haiku-20241022",  # Pattern Matcher
+    "agent_3": "claude-3-5-haiku-20241022",  # Web Researcher
+    "agent_4": "claude-3-5-haiku-20241022",  # VMRS Mapper
+    "agent_5": "claude-3-5-haiku-20241022"   # QA Validator
+}
+
+# Optional: Use Sonnet for Agent 3 if complex reasoning needed (~70% savings)
+# AGENT_MODELS["agent_3"] = "claude-sonnet-4-20250514"
+
 CLAUDE_CONFIG = {
-    "model": "claude-sonnet-4-20250514",
+    "model": DEFAULT_MODEL,
+    "agent_models": AGENT_MODELS,
     "max_tokens": {
         "agent_1": 4000,
         "agent_2": 3000,
@@ -326,6 +345,13 @@ CONFIDENCE_THRESHOLDS = {
     "require_web_search": 70
 }
 ```
+
+**Why Haiku?**
+- **~90% cost reduction** vs Sonnet 4
+- **Same accuracy** for deterministic tasks (temp=0.0)
+- **Faster response times** = better throughput
+- **Ideal for**: Classification, pattern matching, validation
+- **Processing 10,000 parts**: ~$X vs ~$Y with Sonnet 4
 
 ### Environment Variables
 ```bash

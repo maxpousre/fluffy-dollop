@@ -44,7 +44,8 @@ class ClaudeClient:
         system_prompt: Optional[str] = None,
         max_tokens: int = 4000,
         temperature: float = 0.0,
-        max_retries: int = 3
+        max_retries: int = 3,
+        agent_name: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Call Claude API with retry logic.
@@ -55,6 +56,7 @@ class ClaudeClient:
             max_tokens: Maximum tokens in response
             temperature: Temperature for generation (0.0 for deterministic)
             max_retries: Maximum number of retry attempts
+            agent_name: Optional agent name (e.g., "agent_1") for per-agent model selection
 
         Returns:
             Parsed response from Claude
@@ -62,7 +64,13 @@ class ClaudeClient:
         Raises:
             Exception: If all retries fail
         """
-        model = self.config.get("model", "claude-sonnet-4-20250514")
+        # Support per-agent model selection
+        if agent_name and "agent_models" in self.config:
+            model = self.config["agent_models"].get(agent_name)
+            if not model:
+                model = self.config.get("model", "claude-3-5-haiku-20241022")
+        else:
+            model = self.config.get("model", "claude-3-5-haiku-20241022")
 
         for attempt in range(max_retries):
             try:

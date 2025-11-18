@@ -16,7 +16,7 @@ Processing:
 - Output: parts_grouped_by_system.json
 
 Configuration:
-- Model: claude-sonnet-4-20250514
+- Model: claude-3-5-haiku-20241022 (cost-optimized)
 - Temperature: 0.0 (deterministic)
 - Max Tokens: 4000
 """

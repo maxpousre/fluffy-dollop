@@ -15,7 +15,7 @@ Processing:
 - Output: High-confidence mappings + parts flagged for web search
 
 Configuration:
-- Model: claude-sonnet-4-20250514
+- Model: claude-3-5-haiku-20241022 (cost-optimized)
 - Temperature: 0.0 (deterministic)
 - Max Tokens: 3000
 """

@@ -30,8 +30,27 @@ SEARCH_TEMPLATES_DIR = RULES_DIR / "search_templates"
 # CLAUDE API CONFIGURATION
 # ==========================================
 
+# Default model (Haiku for cost optimization)
+# Claude 3.5 Haiku is ~90% cheaper than Sonnet 4 and excellent for structured tasks
+DEFAULT_MODEL = "claude-3-5-haiku-20241022"
+
+# Per-agent model configuration (allows flexibility)
+# Use Haiku for most agents (cost-efficient), Sonnet only if complex reasoning needed
+AGENT_MODELS = {
+    "agent_1": "claude-3-5-haiku-20241022",  # System Classifier - structured classification
+    "agent_2": "claude-3-5-haiku-20241022",  # Pattern Matcher - rule-based matching
+    "agent_3": "claude-3-5-haiku-20241022",  # Web Researcher - can use Haiku for structured extraction
+    "agent_4": "claude-3-5-haiku-20241022",  # VMRS Mapper - deterministic mapping
+    "agent_5": "claude-3-5-haiku-20241022"   # QA Validator - validation rules
+}
+
+# Alternative: Use Sonnet for Agent 3 if you need deeper reasoning for web research
+# Uncomment below to use hybrid approach (~70% cost savings instead of ~90%)
+# AGENT_MODELS["agent_3"] = "claude-sonnet-4-20250514"
+
 CLAUDE_CONFIG = {
-    "model": "claude-sonnet-4-20250514",
+    "model": DEFAULT_MODEL,  # Fallback default
+    "agent_models": AGENT_MODELS,  # Per-agent model selection
     "max_tokens": {
         "agent_1": 4000,  # System Classifier
         "agent_2": 3000,  # Pattern Matcher
