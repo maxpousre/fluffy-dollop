@@ -1,0 +1,169 @@
+SYSTEM: 13 - Brakes
+DESCRIPTION: Brake System Components
+
+==========================================
+WEB SEARCH CONFIGURATION
+==========================================
+WEB_SEARCH_REQUIRED: True
+WEB_SEARCH_CATEGORIES:
+  - Calipers (always require specifications)
+  - Rotors with diameter specifications
+  - Custom or modified brake components
+
+WEB_SEARCH_OPTIONAL: False
+WEB_SEARCH_QUERY_TEMPLATE: "{Part Name} {Part Code} specifications for front or rear component"
+
+==========================================
+PATTERN MATCHING RULES
+==========================================
+
+1. BRAKE PAD/SHOE DETECTION:
+   Keywords: "pad", "shoe", "lining", "friction material"
+   Position Required: "front", "rear", "drive axle", "trailer axle", "steer"
+
+   Logic:
+   - If position keywords found → Extract position
+   - If position missing → FLAG: WEB_SEARCH_NEEDED
+   - Heavy duty keywords: "HD", "heavy duty", "severe service"
+   - Light duty keywords: "LD", "light duty", "standard"
+
+2. ROTOR/DRUM DETECTION:
+   Keywords: "rotor", "drum", "disc"
+
+   Critical Attributes:
+   - Diameter specification (e.g., "15 inch", "381mm")
+   - If diameter not in part name → FLAG: WEB_SEARCH_NEEDED
+
+   Code Assignment:
+   - Rotors (disc): 13-010 to 13-019
+   - Drums: 13-020 to 13-029
+
+3. CALIPER DETECTION:
+   Keywords: "caliper", "wheel cylinder", "brake cylinder"
+
+   Requirements:
+   - ALWAYS require web search for specifications
+   - Must verify position (front/rear)
+   - Must verify axle configuration
+
+   Code Range: 13-030 to 13-049
+
+4. AIR VS HYDRAULIC BRAKE SYSTEM:
+   Air Brake Indicators: "air brake", "pneumatic", "Bendix", "Haldex"
+   Hydraulic Indicators: "hydraulic", "DOT 3", "DOT 4", "brake fluid"
+
+   Code Ranges:
+   - Air brake components: 13-100 to 13-299
+   - Hydraulic components: 13-300 to 13-499
+
+==========================================
+CODE ASSIGNMENT RULES
+==========================================
+
+FRONT BRAKE COMPONENTS:
+- Pads/Shoes: 13-001 to 13-010
+- Rotors/Drums: 13-011 to 13-020
+- Calipers: 13-031 to 13-040
+
+REAR BRAKE COMPONENTS:
+- Pads/Shoes: 13-051 to 13-060
+- Rotors/Drums: 13-061 to 13-070
+- Calipers: 13-081 to 13-090
+
+HEAVY DUTY DESIGNATION:
+- Add suffix "-HD" for heavy-duty components
+- Heavy duty indicators: 10+ ply, severe service, class 8 truck
+
+==========================================
+VALIDATION RULES
+==========================================
+
+CRITICAL CHECKS:
+1. NEVER map brake components to suspension codes (14-xxx)
+2. NEVER map brake components to steering codes (15-xxx)
+3. Position must be explicitly stated or researched
+4. Air and hydraulic components must not be confused
+
+CONSISTENCY CHECKS:
+- Front brake parts must have "front" or "steer" in notes
+- Rear brake parts must have "rear" or "drive/trailer" in notes
+- Heavy duty parts should have HD designation
+- Part code ranges must align with position
+
+COMMON ERROR PATTERNS:
+- Brake pad mapped to rotor code → FAIL
+- Air brake component mapped to hydraulic code → FAIL
+- Missing position specification → FLAG FOR REVIEW
+- Duty level mismatch → FLAG FOR REVIEW
+
+==========================================
+CONFIDENCE SCORING GUIDELINES
+==========================================
+
+HIGH CONFIDENCE (90-100%):
+- Exact match in validated parts database
+- Clear position indicators + duty level + brake type
+- All required attributes present
+
+MEDIUM CONFIDENCE (70-89%):
+- Position identified but duty level unclear
+- Brake type assumed but not explicit
+- Similar pattern in validated database
+
+LOW CONFIDENCE (<70%):
+- Position ambiguous or missing
+- Brake type uncertain
+- No similar examples in database
+→ Require web search
+
+==========================================
+EXAMPLES
+==========================================
+
+GOOD MAPPINGS:
+✓ "Front Brake Pad Heavy Duty Air" → 13-001-HD
+  Reason: Position (front) + duty (heavy) + type (air) all clear
+
+✓ "Rear Brake Rotor 15 inch" → 13-061
+  Reason: Position (rear) + component (rotor) + size specified
+
+✓ "Steer Axle Brake Caliper" → 13-031
+  Reason: Position (steer/front) + component (caliper)
+
+PROBLEMATIC CASES:
+✗ "Brake Pad" → INSUFFICIENT INFO
+  Reason: Missing position (front/rear?)
+
+✗ "Heavy Duty Brake Component" → REQUIRES WEB SEARCH
+  Reason: Component type unclear, position missing
+
+✗ "Universal Brake Pad" → FLAG FOR REVIEW
+  Reason: "Universal" suggests multiple applications
+
+==========================================
+EDGE CASES & SPECIAL HANDLING
+==========================================
+
+1. COMBINATION KITS:
+   Example: "Front and Rear Brake Pad Kit"
+   → Should be split into two separate mappings
+   → Or map to kit code if customer has kit codes
+
+2. AFTERMARKET VS OEM:
+   - Both map to same VMRS codes
+   - Note manufacturer in description field
+   - No separate codes for aftermarket
+
+3. REMANUFACTURED PARTS:
+   - Map to same codes as new parts
+   - Add "REMAN" to notes field
+   - Quality level not reflected in VMRS code
+
+4. CROSS-REFERENCE PARTS:
+   Example: "Replaces ABC-123, fits XYZ-456"
+   → Ignore cross-reference info for VMRS mapping
+   → Map based on actual part function only
+
+==========================================
+END OF RULES FILE
+==========================================

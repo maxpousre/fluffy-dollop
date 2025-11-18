@@ -1,0 +1,159 @@
+SYSTEM: 17 - Tires and Wheels
+DESCRIPTION: Tire and Wheel Components
+
+==========================================
+WEB SEARCH CONFIGURATION
+==========================================
+WEB_SEARCH_REQUIRED: True
+WEB_SEARCH_CATEGORIES:
+  - Tires with unclear tread pattern
+  - Tires without position specification
+  - Custom or specialty tires
+
+WEB_SEARCH_QUERY_TEMPLATE: "{Part Name} {Part Code} - Rib or Lug Pattern for rib vs. number of plys"
+
+==========================================
+PATTERN MATCHING RULES
+==========================================
+
+1. TIRE SIZE DETECTION:
+   Standard Formats:
+   - Metric: "11R22.5", "295/75R22.5"
+   - Standard: "10.00R20", "9.00-20"
+
+   Extract:
+   - Width (e.g., 11, 295, 10.00)
+   - Aspect ratio if present (e.g., 75)
+   - Rim diameter (e.g., 22.5, 20)
+
+2. PLY RATING DETECTION:
+   Keywords: "ply", "PR", "load range"
+
+   Common Ratings:
+   - Light duty: 6, 8, 10 ply
+   - Heavy duty: 12, 14, 16, 18 ply
+
+3. TREAD PATTERN DETECTION:
+   Rib Pattern: "rib", "highway", "R", "steer"
+   Lug Pattern: "lug", "drive", "traction", "D", "all position"
+
+4. POSITION DETECTION:
+   Steer: "steer", "front", "steering axle", "rib"
+   Drive: "drive", "traction", "lug"
+   Trailer: "trailer", "all position"
+
+   Code Assignment:
+   - Steer tires: 17-051 to 17-059
+   - Drive tires: 17-061 to 17-069
+   - Trailer tires: 17-071 to 17-079
+   - All position: 17-081 to 17-089
+
+==========================================
+CODE ASSIGNMENT RULES
+==========================================
+
+TIRE POSITIONING:
+- Steer/Front (Rib): 17-051 to 17-059
+- Drive (Lug): 17-061 to 17-069
+- Trailer: 17-071 to 17-079
+- All Position: 17-081 to 17-089
+
+SIZE-SPECIFIC CODES:
+- 11R22.5 Drive: 17-061
+- 11R22.5 Steer: 17-051
+- 295/75R22.5 Drive: 17-062
+- 295/75R22.5 Steer: 17-052
+
+WHEELS AND RIMS:
+- Steel wheels: 17-100 to 17-119
+- Aluminum wheels: 17-120 to 17-139
+
+==========================================
+VALIDATION RULES
+==========================================
+
+CRITICAL CHECKS:
+1. Tire size must be valid format
+2. Position must match tread pattern (rib=steer, lug=drive)
+3. Ply rating should align with duty level
+4. Wheel size must match tire size if specified
+
+CONSISTENCY CHECKS:
+- Steer tires should have rib pattern
+- Drive tires should have lug pattern
+- Tire size must be extracted and noted
+- Ply rating should be documented
+
+COMMON ERROR PATTERNS:
+- Rib tire mapped to drive code → FAIL
+- Lug tire mapped to steer code → FAIL
+- Missing size specification → FLAG FOR REVIEW
+- Position/pattern mismatch → FLAG FOR REVIEW
+
+==========================================
+CONFIDENCE SCORING GUIDELINES
+==========================================
+
+HIGH CONFIDENCE (90-100%):
+- Size clearly specified
+- Position clearly indicated
+- Tread pattern matches position
+- Exact match in validated database
+
+MEDIUM CONFIDENCE (70-89%):
+- Size specified but position unclear
+- Pattern suggested but not explicit
+- Similar tire in validated database
+
+LOW CONFIDENCE (<70%):
+- Size unclear or missing
+- Position ambiguous
+- Pattern not specified
+→ Require web search
+
+==========================================
+EXAMPLES
+==========================================
+
+GOOD MAPPINGS:
+✓ "11R22.5 Drive Tire 14 Ply" → 17-061
+  Reason: Size + position (drive) + ply rating all clear
+
+✓ "295/75R22.5 Steer Tire Rib" → 17-052
+  Reason: Size + position (steer) + pattern (rib) match
+
+✓ "11R22.5 All Position Tire" → 17-081
+  Reason: Size + application (all position) clear
+
+PROBLEMATIC CASES:
+✗ "Truck Tire" → INSUFFICIENT INFO
+  Reason: No size, position, or pattern specified
+
+✗ "11R22.5 Tire" → REQUIRES WEB SEARCH
+  Reason: Size specified but position/pattern missing
+
+✗ "Steer Tire 14 Ply" → REQUIRES WEB SEARCH
+  Reason: Position clear but size missing
+
+==========================================
+SPECIAL HANDLING
+==========================================
+
+1. RETREAD TIRES:
+   - Map to same codes as new tires
+   - Note "RETREAD" in description
+   - Position and size still required
+
+2. WINTER/SPECIALTY TIRES:
+   - Map based on position (steer/drive/trailer)
+   - Note specialty application in description
+   - No separate codes for winter tires
+
+3. DUAL APPLICATIONS:
+   Example: "All Position Tire"
+   → Map to all position code (17-081+)
+   → Note can be used in multiple positions
+
+==========================================
+END OF RULES FILE
+==========================================

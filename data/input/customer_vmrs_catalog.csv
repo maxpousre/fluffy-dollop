@@ -1,0 +1,36 @@
+vmrs_code,system_name,description,is_custom
+10,Lubrication,Lubrication System,false
+10-040,Lubrication,Engine Oil Filter Spin-On,false
+10-041,Lubrication,Engine Oil Filter Cartridge,false
+10-050,Lubrication,Transmission Filter,false
+10-051,Lubrication,Transmission Filter - Allison,false
+10-060,Lubrication,Hydraulic Filter,false
+10-061,Lubrication,Hydraulic Filter Cartridge,false
+10-100,Lubrication,Fuel Filter Primary,false
+10-101,Lubrication,Fuel Filter Secondary,false
+10-200,Lubrication,Air Filter,false
+13,Brakes,Brake System,false
+13-001,Brakes,Front Brake Pad - Air,false
+13-002,Brakes,Front Brake Pad - Hydraulic,false
+13-010,Brakes,Front Brake Rotor,false
+13-011,Brakes,Front Brake Drum,false
+13-031,Brakes,Front Brake Caliper,false
+13-051,Brakes,Rear Brake Pad - Air,false
+13-052,Brakes,Rear Brake Pad - Hydraulic,false
+13-053,Brakes,Rear Brake Shoe - Air,false
+13-060,Brakes,Rear Brake Rotor,false
+13-061,Brakes,Rear Brake Drum,false
+13-081,Brakes,Rear Brake Caliper,false
+13-999,Brakes,Custom Brake Component,true
+17,Tires,Tires and Wheels,false
+17-051,Tires,Steer Tire 11R22.5,false
+17-052,Tires,Steer Tire 295/75R22.5,false
+17-061,Tires,Drive Tire 11R22.5,false
+17-062,Tires,Drive Tire 295/75R22.5,false
+17-071,Tires,Trailer Tire 11R22.5,false
+17-081,Tires,All Position Tire 11R22.5,false
+17-100,Tires,Steel Wheel 22.5,false
+17-120,Tires,Aluminum Wheel 22.5,false
+14,Frame,Frame and Frame Components,false
+15,Steering,Steering System,false
+18,Suspension,Suspension System,false

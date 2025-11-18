@@ -1,0 +1,26 @@
+# VMRS Parts Classification System - Python Dependencies
+
+# Core dependencies
+anthropic>=0.30.0           # Claude API client
+pandas>=2.0.0               # Data manipulation and CSV handling
+requests>=2.31.0            # HTTP requests for web search
+python-dotenv>=1.0.0        # Environment variable management
+
+# Progress tracking and UI
+tqdm>=4.66.0                # Progress bars for batch processing
+
+# Data validation
+jsonschema>=4.19.0          # JSON schema validation
+
+# Testing (optional, for development)
+pytest>=7.4.0               # Testing framework
+pytest-cov>=4.1.0           # Code coverage
+pytest-mock>=3.11.1         # Mocking utilities
+
+# Code quality (optional, for development)
+black>=23.7.0               # Code formatting
+flake8>=6.1.0               # Linting
+mypy>=1.5.0                 # Type checking
+
+# Documentation (optional)
+sphinx>=7.1.0               # Documentation generation

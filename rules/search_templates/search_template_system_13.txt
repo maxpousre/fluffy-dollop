@@ -1,0 +1,54 @@
+SYSTEM 13: Brake Components Search Template
+
+Base Query Format:
+"{Part Name} {Part Code} specifications for front or rear component"
+
+Additional Search Terms by Category:
+
+BRAKE PADS/SHOES:
+- Add: "for front or rear component"
+- Add: "heavy duty or light duty"
+- Add: "air brake or hydraulic"
+- Example: "Brake Pad Set ABC123 specifications for front or rear air brake heavy duty"
+
+ROTORS/DRUMS:
+- Add: "diameter specifications"
+- Add: "vehicle application"
+- Add: "front or rear axle"
+- Example: "Brake Rotor XYZ789 diameter specifications front or rear axle"
+
+CALIPERS:
+- Add: "axle position"
+- Add: "piston configuration"
+- Add: "air or hydraulic system"
+- Example: "Brake Caliper DEF456 axle position front or rear air brake"
+
+Search Priority:
+1. Manufacturer's official product pages
+2. Cross-reference catalogs (e.g., AutoZone, NAPA, Advance Auto)
+3. Brake parts specialist sites (Bendix, Haldex, Meritor)
+4. Technical specification sheets
+5. OEM parts databases
+
+Information to Extract:
+- Component type (pad/shoe/rotor/drum/caliper)
+- Position (front/rear/drive axle/trailer axle/steer)
+- Brake system type (air/hydraulic)
+- Duty level (heavy/light/standard)
+- Dimensions (diameter, width, thickness for rotors/drums)
+- Application (vehicle types, makes, models, GVW)
+- Manufacturer details
+- Air brake specific: chamber type, stroke length
+- Hydraulic specific: piston diameter, caliper type
+
+Minimum Required Info for Mapping:
+- Component type (pad/rotor/caliper/drum)
+- Position (front/rear)
+- Brake type (air/hydraulic) if not obvious from application
+
+Flag for Human Review if:
+- Conflicting information across sources
+- Position unclear after research
+- Custom or modified component
+- Multiple applications with different positions
+- Air vs hydraulic ambiguous

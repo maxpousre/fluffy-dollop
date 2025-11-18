@@ -1,0 +1,6 @@
+part_code,part_name,vmrs_code,confidence,match_type,date_validated
+T001,11R22.5 Steer Tire Rib,17-051,100,human_validated,2025-01-15
+T002,11R22.5 Drive Tire Lug,17-061,100,human_validated,2025-01-15
+T003,295/75R22.5 Steer Tire,17-052,100,human_validated,2025-01-15
+T004,11R22.5 All Position Tire,17-081,100,human_validated,2025-01-15
+W001,Steel Wheel 22.5,17-100,100,human_validated,2025-01-15

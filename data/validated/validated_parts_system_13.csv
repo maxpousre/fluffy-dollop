@@ -1,0 +1,6 @@
+part_code,part_name,vmrs_code,confidence,match_type,date_validated
+BP001,Front Brake Pad Heavy Duty,13-001,100,human_validated,2025-01-15
+BP002,Rear Brake Pad Air Brake,13-053,100,human_validated,2025-01-15
+BR001,Front Brake Rotor 15 Inch,13-010,100,human_validated,2025-01-15
+BR002,Rear Brake Drum Heavy Duty,13-061,100,human_validated,2025-01-15
+BC001,Front Brake Caliper,13-031,100,human_validated,2025-01-15
