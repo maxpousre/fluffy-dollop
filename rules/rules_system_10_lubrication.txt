@@ -1,0 +1,129 @@
+SYSTEM: 10 - Lubrication
+DESCRIPTION: Lubrication System Components
+
+==========================================
+WEB SEARCH CONFIGURATION
+==========================================
+WEB_SEARCH_REQUIRED: True
+WEB_SEARCH_CATEGORIES:
+  - Filters with unclear application (engine vs transmission)
+  - Specialty lubricants and fluids
+  - Custom or multi-application filters
+
+WEB_SEARCH_QUERY_TEMPLATE: "Is {Part Name} {Part Code} used for engine or transmission"
+
+==========================================
+PATTERN MATCHING RULES
+==========================================
+
+1. OIL FILTER DETECTION:
+   Keywords: "oil filter", "engine filter", "lube filter"
+
+   Application Keywords:
+   - Engine: "engine", "motor", "crankcase"
+   - Transmission: "transmission", "trans", "gearbox", "allison"
+   - Hydraulic: "hydraulic", "hyd", "power steering"
+
+   Filter Style:
+   - Spin-on: "spin-on", "spin on", "cartridge style"
+   - Cartridge: "cartridge", "element", "insert"
+
+   Code Assignment:
+   - Engine oil filter spin-on: 10-040
+   - Engine oil filter cartridge: 10-041
+   - Transmission filter: 10-050 to 10-059
+   - Hydraulic filter: 10-060 to 10-069
+
+2. FUEL FILTER DETECTION:
+   Keywords: "fuel filter", "diesel filter", "gas filter"
+
+   Primary/Secondary:
+   - Primary: "primary", "first stage", "water separator"
+   - Secondary: "secondary", "final", "polish"
+
+   Code Range: 10-100 to 10-119
+
+3. AIR FILTER DETECTION:
+   Keywords: "air filter", "intake filter", "engine air"
+
+   Code Range: 10-200 to 10-219
+
+==========================================
+CODE ASSIGNMENT RULES
+==========================================
+
+ENGINE LUBRICATION:
+- Oil filters (spin-on): 10-040
+- Oil filters (cartridge): 10-041
+- Oil coolers: 10-045
+
+TRANSMISSION LUBRICATION:
+- Transmission filters: 10-050 to 10-059
+- Transmission coolers: 10-055
+
+HYDRAULIC SYSTEMS:
+- Hydraulic filters: 10-060 to 10-069
+
+==========================================
+VALIDATION RULES
+==========================================
+
+CRITICAL CHECKS:
+1. Filter type must match application (engine/transmission/hydraulic)
+2. Spin-on vs cartridge designation must be correct
+3. Fuel filters must not be mapped to oil filter codes
+
+CONSISTENCY CHECKS:
+- Engine filters should indicate "engine" in notes
+- Transmission filters should reference transmission type if known
+- Style (spin-on/cartridge) must align with code
+
+COMMON ERROR PATTERNS:
+- Transmission filter mapped to engine code → FAIL
+- Hydraulic filter mapped to engine code → FAIL
+- Missing application specification → FLAG FOR REVIEW
+
+==========================================
+CONFIDENCE SCORING GUIDELINES
+==========================================
+
+HIGH CONFIDENCE (90-100%):
+- Clear application stated (engine/transmission/hydraulic)
+- Filter style clearly indicated
+- Exact match in validated database
+
+MEDIUM CONFIDENCE (70-89%):
+- Application implied but not explicit
+- Filter style assumed from part number
+- Similar pattern in validated database
+
+LOW CONFIDENCE (<70%):
+- Application unclear
+- Could be multiple applications
+- No similar examples in database
+→ Require web search
+
+==========================================
+EXAMPLES
+==========================================
+
+GOOD MAPPINGS:
+✓ "Engine Oil Filter Spin-On" → 10-040
+  Reason: Application (engine) + style (spin-on) both clear
+
+✓ "Allison Transmission Filter" → 10-050
+  Reason: Application (transmission) + manufacturer clear
+
+✓ "Hydraulic Filter Cartridge" → 10-060
+  Reason: Application (hydraulic) + style clear
+
+PROBLEMATIC CASES:
+✗ "Oil Filter" → REQUIRES WEB SEARCH
+  Reason: Application unclear (engine? transmission? hydraulic?)
+
+✗ "Filter Element" → INSUFFICIENT INFO
+  Reason: Type and application both missing
+
+==========================================
+END OF RULES FILE
+==========================================

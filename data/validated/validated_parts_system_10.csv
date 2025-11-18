@@ -1,0 +1,6 @@
+part_code,part_name,vmrs_code,confidence,match_type,date_validated
+OF001,Engine Oil Filter Spin-On,10-040,100,human_validated,2025-01-15
+OF002,Engine Oil Filter Cartridge,10-041,100,human_validated,2025-01-15
+TF001,Transmission Filter Allison,10-051,100,human_validated,2025-01-15
+HF001,Hydraulic Filter Cartridge,10-061,100,human_validated,2025-01-15
+FF001,Fuel Filter Primary,10-100,100,human_validated,2025-01-15

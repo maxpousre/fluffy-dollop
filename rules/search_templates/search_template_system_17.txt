@@ -1,0 +1,66 @@
+SYSTEM 17: Tires and Wheels Search Template
+
+Base Query Format:
+"{Part Name} {Part Code} - Rib or Lug Pattern for rib vs. number of plys"
+
+Additional Search Terms by Category:
+
+TIRES:
+- Add: "rib or lug tread pattern"
+- Add: "steer drive or trailer position"
+- Add: "ply rating load range"
+- Example: "11R22.5 ABC123 rib or lug tread pattern steer drive trailer ply rating"
+
+SPECIALTY TIRES:
+- Add: "all position or specific position"
+- Add: "application type"
+- Example: "{Part Name} {Part Code} all position tire application"
+
+WHEELS/RIMS:
+- Add: "steel or aluminum"
+- Add: "wheel specifications bolt pattern"
+- Example: "{Part Name} {Part Code} wheel specifications steel aluminum"
+
+Search Priority:
+1. Tire manufacturer websites (Goodyear, Michelin, Bridgestone, etc.)
+2. Tire retailer databases (Tire Rack, Discount Tire)
+3. Cross-reference catalogs
+4. Technical specification sheets
+5. Commercial tire dealers
+
+Information to Extract:
+FOR TIRES:
+- Tire size (e.g., 11R22.5, 295/75R22.5)
+- Ply rating (6, 8, 10, 12, 14, 16, 18)
+- Load range (if ply not specified)
+- Tread pattern (rib/lug/all-position)
+- Position (steer/drive/trailer/all-position)
+- Tread depth (32nds)
+- Application (highway/mixed service/off-road)
+- Retread or new
+- Manufacturer and model
+
+FOR WHEELS:
+- Wheel diameter
+- Wheel width
+- Material (steel/aluminum)
+- Bolt pattern
+- Hub pilot diameter
+- Compatible tire sizes
+
+Minimum Required Info for Mapping:
+FOR TIRES:
+- Tire size specification
+- Position (steer/drive/trailer) OR tread pattern (rib/lug)
+- Ply rating (helpful but not critical)
+
+FOR WHEELS:
+- Wheel diameter and width
+- Material type (steel/aluminum)
+
+Flag for Human Review if:
+- Size specification unclear or non-standard
+- Position and tread pattern conflict (rib on drive, lug on steer)
+- Multiple position applications
+- Custom or specialty tire
+- Incomplete size information

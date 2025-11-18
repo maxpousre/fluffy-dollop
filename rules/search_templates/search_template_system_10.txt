@@ -1,0 +1,47 @@
+SYSTEM 10: Lubrication Components Search Template
+
+Base Query Format:
+"Is {Part Name} {Part Code} used for engine or transmission"
+
+Additional Search Terms by Category:
+
+OIL FILTERS:
+- Add: "engine or transmission application"
+- Add: "spin-on or cartridge style"
+- Example: "Is ABC-123 Oil Filter used for engine or transmission application"
+
+FUEL FILTERS:
+- Add: "primary or secondary filter"
+- Add: "diesel or gasoline application"
+- Example: "{Part Name} {Part Code} primary or secondary fuel filter"
+
+HYDRAULIC FILTERS:
+- Add: "hydraulic system application"
+- Add: "micron rating"
+- Example: "{Part Name} {Part Code} hydraulic filter specifications"
+
+Search Priority:
+1. Manufacturer's official product pages
+2. Cross-reference catalogs (AutoZone, NAPA, O'Reilly)
+3. Technical specification sheets
+4. Filter manufacturer databases (WIX, Baldwin, Donaldson)
+
+Information to Extract:
+- Application (engine/transmission/hydraulic)
+- Filter type (oil/fuel/air/hydraulic)
+- Style (spin-on/cartridge)
+- Primary or secondary (for fuel filters)
+- Dimensions and specifications
+- Compatible vehicle types
+- Manufacturer details
+
+Minimum Required Info for Mapping:
+- Application (engine/transmission/hydraulic)
+- Filter type
+- Style (spin-on vs cartridge for oil filters)
+
+Flag for Human Review if:
+- Conflicting information across sources
+- Multiple applications possible
+- Custom or specialty filter
+- Application unclear after research
